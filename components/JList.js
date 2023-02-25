@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, StyleSheet, Dimensions, TextInput, Button } from 'react-native';
-const {width, height} = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 
 const INCREMENT = 1;
    
@@ -15,7 +15,6 @@ class JList extends Component {
          newTask: '',
       };
       this.addInput = this.addInput.bind(this);
-      // this.addTask = this.addTask.bind(this);
    }
    alertItemName = (item) => {
       alert(item.name)
@@ -35,7 +34,7 @@ class JList extends Component {
   }
    render() {
       return (
-         <View style={{flex: 12, backgroundColor: 'red', width: width}}>
+         <View style={{flex: 12, width: width}}>
             <View style={styles.inputList}>
                <TextInput style={styles.input} placeholder="What do we want to do?"
                   onChangeText={(task) => this.setState({newTask: task})}
@@ -67,7 +66,6 @@ const styles = StyleSheet.create ({
    container: {
       padding: 10,
       marginTop: 3,
-      backgroundColor: '#d9f9b1',
       alignItems: 'center',
    },
    text: {

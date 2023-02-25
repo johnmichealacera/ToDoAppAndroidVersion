@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, StyleSheet, View, Dimensions } from 'react-native';
-const {width, height} = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 
 const JText = (props) => (
   <View style={styles.container}>
@@ -12,10 +12,8 @@ const styles = StyleSheet.create({
     flex: 1,
     width,
     flexDirection: 'row',
-    backgroundColor: '#a3e',
     alignItems: 'center',
     justifyContent: 'center',
-    // marginTop: '10',
   },
 });
 export default JText;

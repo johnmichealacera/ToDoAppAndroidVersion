@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Button, TextInput, View, StyleSheet, Dimensions } from 'react-native';
-const {width, height} = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 
 const JInputList = (props) => (
   <View style={styles.container}>
