@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "ToDoAppAndroidVersion",
-    "slug": "ToDoAppAndroidVersion",
+    "slug": "todoapp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -28,6 +28,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "378332e8-b620-4567-8ab0-e8c3f74c6c37"
+      }
+    },
+    "owner": "jmann432015"
   }
 }

@@ -1,11 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import JInputList from './components/JInputList';
+import JText from './components/JText';
+import JList from './components/JList';
+import AddInputDemo from './components/AddInputDemo';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <JText myText = 'To Dos' style={{ marginTop: 75 }}/>
+      <JText myText = 'Task Completed:' />
+      {/* <JInputList myText = 'Add Task'/> */}
+      <JList myText = 'Add Task'/>
+      {/* <AddInputDemo /> */}
+      {/* <StatusBar style="auto" /> */}
     </View>
   );
 }
@@ -13,8 +21,9 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: 'column',
+    backgroundColor: '#000',
+    alignItems: 'space-around',
+    justifyContent: 'space-around',
   },
 });
