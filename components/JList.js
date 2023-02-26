@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Dimensions, TextInput, Button } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, Dimensions, TextInput, Button, ScrollView } from 'react-native';
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 const {width} = Dimensions.get('window');
 
 const INCREMENT = 1;
@@ -10,27 +11,56 @@ class JList extends Component {
       this.state={
          myText: props.myText,
          counter: 0,
-         numOfInput: [0],
-         names: [],
+         tasks: [],
          newTask: '',
+         fetchTaskCompleted: props.fetchTaskCompleted,
       };
       this.addInput = this.addInput.bind(this);
+      this.deleteTask = this.deleteTask.bind(this);
    }
    alertItemName = (item) => {
-      alert(item.name)
+      this.setState(
+         { tasks: this.state.tasks.map((task) => 
+            { 
+               if (task.id === item.id) {
+                  task.isChecked = !item.isChecked; 
+                  task.iconName = task.isChecked ?
+                  "checkbox-marked" : "checkbox-blank-outline";
+                  return task;
+                  }
+            else {
+               return task;
+            }
+         }),
+         fetchTaskCompleted: this.state.tasks.filter((task) => task.iconName === 'checkbox-marked').length,
+      });
    }
    addInput(){
       if (this.state.newTask) {
          this.state.counter = this.state.counter + INCREMENT;
-         this.state.names.push({ id: this.state.counter, name: this.state.newTask});
-         this.setState((state) => ({
-            counter: state.counter++,
-            numOfInput: [...state.numOfInput, state.counter]
-         }));
+         this.setState(
+            { 
+               tasks: [
+                  ...this.state.tasks, 
+                  { 
+                  id: this.state.counter, 
+                  name: this.state.newTask,
+                  isChecked: false,
+                  iconName: 'checkbox-blank-outline',
+                  }
+               ],
+               newTask: '',
+               fetchTaskCompleted: this.state.tasks.filter((task) => task.iconName === 'checkbox-marked').length,
+            }
+         );
          this.state.newTask = '';
       } else {
          alert('Please enter a new task!')
       }
+  }
+  deleteTask(task) {
+   this.setState({ tasks: this.state.tasks.filter((item) => item?.id !== task.id)
+   });
   }
    render() {
       return (
@@ -43,18 +73,26 @@ class JList extends Component {
                <Button title={this.state.myText} style={{flex: 1}} onPress={this.addInput}/>
             </View>
             <View style={{flex: 11}}>
-            {
-               this.state.names.map((item, index) => (
-                  <TouchableOpacity
-                     key = {item.id}
-                     style = {styles.container}
-                     onPress = {() => this.alertItemName(item)}>
-                     <Text style = {styles.text}>
-                        {item.name}
-                     </Text>
-                  </TouchableOpacity>
-               ))
-            }
+            <ScrollView>
+               {
+                  this.state.tasks.map((item, index) => (
+                     <TouchableOpacity
+                        key = {item.id}
+                        style = {styles.container}
+                        onPress = {() => this.alertItemName(item)}
+                        >
+                        <MaterialCommunityIcons 
+                           name={item.iconName} size={24} color="#000" style={{flex: 1}}/>
+                        <Text style = {styles.text}>
+                           {item.name}
+                        </Text>
+                        <Button title='Delete' style={{flex: 1}}
+                           onPress = {() => this.deleteTask(item)}
+                        />
+                     </TouchableOpacity>
+                  ))
+               }
+            </ScrollView>
             </View>
          </View>
       )
@@ -68,9 +106,12 @@ const styles = StyleSheet.create ({
       marginTop: 3,
       alignItems: 'center',
       backgroundColor: '#fff',
+      flexDirection: 'row'
    },
    text: {
-      color: '#4f603c'
+      color: '#4f603c',
+      flex: 10,
+      textAlign: 'left',
    },
    inputList: {
       flex: 1,

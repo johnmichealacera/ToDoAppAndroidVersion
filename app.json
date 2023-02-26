@@ -4,7 +4,7 @@
     "slug": "todoapp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/todo-list-icon.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
@@ -22,9 +22,10 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/todo-list-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.jmann432015.todoapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
